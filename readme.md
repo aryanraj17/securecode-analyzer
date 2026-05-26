@@ -1,10 +1,17 @@
 # SecureCode Analyzer
 
-SecureCode Analyzer is a Java 17 Spring Boot backend application that scans Java GitHub repositories and generates structured static-analysis reports.
+> A Java 17 Spring Boot backend application for static code analysis of GitHub repositories.
 
-The project focuses on backend engineering concepts such as REST APIs, layered architecture, repository processing, static code analysis, AST parsing, exception handling, and JSON report generation.
+SecureCode Analyzer scans Java repositories, detects security vulnerabilities, bugs, and code smells, and generates structured JSON reports inspired by DevSecOps and SonarQube-style analysis workflows.
 
-It is designed as an interview-friendly backend project inspired by tools like SonarQube and DevSecOps scanners.
+The project focuses heavily on backend engineering concepts such as:
+- REST APIs
+- Layered architecture
+- Repository processing
+- AST parsing
+- Static analysis
+- Exception handling
+- JSON response generation
 
 ---
 
@@ -12,24 +19,26 @@ It is designed as an interview-friendly backend project inspired by tools like S
 
 - Clone and analyze public GitHub repositories
 - Parse Java source code using JavaParser
-- Detect common security vulnerabilities and coding issues
-- Scan Maven and Gradle dependencies for vulnerable libraries
-- Generate structured JSON analysis reports
-- REST API-based architecture using Spring Boot
-- Modular analyzer architecture for easy rule extension
+- Detect common vulnerabilities and coding issues
+- Analyze Maven/Gradle dependencies
+- Generate structured JSON reports
+- REST API-based backend architecture
+- Modular analyzer system for scalable rule additions
 
 ---
 
 # Tech Stack
 
-- Java 17
-- Spring Boot 3
-- Maven
-- JavaParser
-- JGit
-- Lombok
-- Jackson
-- JUnit
+| Technology | Usage |
+|---|---|
+| Java 17 | Core backend development |
+| Spring Boot 3 | REST API framework |
+| Maven | Dependency management |
+| JavaParser | AST parsing & static analysis |
+| JGit | GitHub repository cloning |
+| Lombok | Boilerplate reduction |
+| Jackson | JSON serialization |
+| JUnit | Testing |
 
 ---
 
@@ -97,13 +106,17 @@ Detects:
 - Insecure random usage
 - Path traversal vulnerabilities
 
+---
+
 ## Bug Analyzer
 Detects:
-- Null pointer risks
+- Potential null dereference risks
 - String comparison using `==`
-- Return inside `finally`
-- Infinite loops
-- hashCode/equals mismatch
+- Return statements inside `finally`
+- Infinite loops without exit conditions
+- `hashCode()` / `equals()` mismatch
+
+---
 
 ## Code Smell Analyzer
 Detects:
@@ -146,12 +159,7 @@ Content-Type: application/json
 ```json
 {
   "repositoryUrl": "https://github.com/owner/repository",
-  "branch": "main",
-  "commitSha": "",
-  "options": {
-    "sonarQubeRulesEnabled": true,
-    "vulnerabilityScanEnabled": true
-  }
+  "branch": "main"
 }
 ```
 
@@ -163,10 +171,57 @@ Content-Type: application/json
 {
   "status": "SUCCESS",
   "summary": {
-    "totalIssues": 12,
-    "qualityGateStatus": "FAILED"
+    "totalFiles": 72,
+    "totalIssues": 28,
+    "qualityGateStatus": "PASSED"
   }
 }
+```
+
+---
+
+# Screenshots
+
+## Project Structure
+
+![Project Structure](images/architecture.png)
+
+---
+
+## Spring Boot Application Running
+
+![Spring Boot Running](images/springboot-running.png)
+
+---
+
+## API Request Using Postman
+
+![Postman Request](images/postman-request.png)
+
+---
+
+## Static Analysis Response
+
+![Analysis Response](images/analysis-response.png)
+
+---
+
+# How It Works
+
+```text
+User sends GitHub repository URL
+                ↓
+Spring Boot API receives request
+                ↓
+Repository gets cloned using JGit
+                ↓
+Java files are parsed using JavaParser
+                ↓
+Analyzers scan source code
+                ↓
+Issues are categorized & aggregated
+                ↓
+Structured JSON report is generated
 ```
 
 ---
@@ -202,16 +257,16 @@ mvn test
 - Java static analysis implemented
 - JSON reporting implemented
 - Tested using Postman
-- Built and tested with Maven + Java 17
+- Built and tested using Maven + Java 17
 
 ---
 
 # Future Improvements
 
 - Frontend dashboard
-- Multi-language support
 - Docker deployment
 - CI/CD integration
+- Multi-language support
 - Authentication & authorization
 - Cloud deployment support
 
@@ -220,6 +275,7 @@ mvn test
 # Learning Outcomes
 
 This project helped in understanding:
+
 - Spring Boot backend development
 - REST API design
 - Static code analysis concepts
@@ -227,3 +283,5 @@ This project helped in understanding:
 - Git repository processing
 - Clean layered architecture
 - Exception handling and validation
+- Backend request lifecycle
+- Modular analyzer design
