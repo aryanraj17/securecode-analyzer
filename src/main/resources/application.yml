@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: securecode-analyzer
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      indent-output: true
+    default-property-inclusion: non_null
+
+# SecureCode Analyzer Configuration
+codereview:
+  # Master switch to enable/disable scanning
+  enabled: true
+
+  # GitHub Configuration
+  github:
+    token: ${GITHUB_TOKEN:}
+    api-url: https://api.github.com
+    clone-directory: ${java.io.tmpdir}/securecode-analyzer-repos
+
+  # Analysis Configuration
+  analysis:
+    sonarqube-rules:
+      enabled: true
+    vulnerability-scan:
+      enabled: true
+
+    # File extensions to analyze
+    supported-extensions:
+      - .java
+      - .xml
+      - .properties
+      - .yml
+      - .yaml
+
+    # Files/directories to exclude from analysis
+    exclusions:
+      - target/
+      - build/
+      - .git/
+      - .idea/
+      - node_modules/
+      - "*.class"
+      - "*.jar"
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.codereview: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

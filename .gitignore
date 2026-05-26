@@ -1,0 +1,34 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Temporary files
+*.tmp
+*.temp
+
+# Java
+*.class
+
+# Generated files
+dependency-reduced-pom.xml
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.properties

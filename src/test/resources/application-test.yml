@@ -1,0 +1,15 @@
+codereview:
+  enabled: true
+  github:
+    token: test-token
+    clone-directory: ${java.io.tmpdir}/securecode-analyzer-test
+  analysis:
+    sonarqube-rules:
+      enabled: true
+    vulnerability-scan:
+      enabled: true
+
+logging:
+  level:
+    root: WARN
+    com.codereview: DEBUG
